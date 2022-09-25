@@ -9,12 +9,13 @@
     - 8, 9 -> нет
 '''
 
-a = int(input('Введите первое число: '))
-b = int(input('Введите второе число: '))
-if a * a == b or b * b == a:
-    print('Да')
-else:
-    print('Нет')
+def Task1():
+    a = int(input('Введите первое число: '))
+    b = int(input('Введите второе число: '))
+    if a * a == b or b * b == a:
+        print('Да')
+    else:
+        print('Нет')
 
 
 
@@ -27,11 +28,12 @@ else:
     - 78, 55, 36, 90, 2 -> 90     
 '''
 
-lst = []
-for i in range(5):
-    lst.append(int(input(f'Введите {i + 1} число: ')))
+def Task2():
+    lst = []
+    for i in range(5):
+        lst.append(int(input(f'Введите {i + 1} число: ')))
 
-print(max(lst))
+    print(max(lst))
 
 # lst.sort()
 # print(lst[-1])
@@ -45,16 +47,17 @@ print(max(lst))
    Необходимо вывести список простых множителей этого числа.
 '''
 
-a = int(input("Введите число: "))
-result = []
-temp_a = a
+def Task3():
+    a = int(input("Введите число: "))
+    result = []
+    temp_a = a
 
-for i in range(2, a):
-    while temp_a % i == 0:
-        result.append(i)
-        temp_a = temp_a // i
+    for i in range(2, a):
+        while temp_a % i == 0:
+            result.append(i)
+            temp_a = temp_a // i
 
-print(result)
+    print(result)
 
 # k = 2
 # numbs = []
@@ -73,19 +76,26 @@ print(result)
 
 ''' Дополнительно '''
 
-a = 17
-b = 5
+def Task4():
+    a = 17
+    b = 5
 
-print(a // b)  # 3
-print(a % b)   # 2
+    print(a // b)  # 3
+    print(a % b)   # 2
 
 # ==========================
+def Task5():
+    a = -17
+    b = 5
 
-a = -17
-b = 5
-
-print(a // b)  # -3    -4
-print(a % b)  # -2     3
+    print(a // b)  # -3    -4
+    print(a % b)  # -2     3
 
 # -3, -2 - C++, C# (ошибка при создании)
 # -4, 3 - python(правильный вариант с математической точки зрения)
+
+# Task1()
+# Task2()
+# Task3()
+# Task4()
+# Task5()
