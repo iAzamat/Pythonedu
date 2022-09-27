@@ -18,12 +18,14 @@ def task1():
     print(my_random(n))
 
 
-# task1()
-
-# from random import random, choises
+# =============
+# from random import randint, choices
 #
-# for _ in range(int(input('введите число: '))):
-#     print(randint(0, 100), end=' ')
+# for _ in range(int(input("Введите число N: "))):
+#     print(randint(0,100), end=' ')
+
+# my_list=[randint(0,100) for _ in range(int(input("Введите число N: ")))]
+# print(*my_list)
 
 
 '''
@@ -37,28 +39,39 @@ def task1():
 
 def task2():
     n = int(input("Введите число n: "))
-    my_dict = dict
-    for i in range(1, n):
-        my_dict = {'ID': i, 'Value': 3 * i + 1}
-        print(my_dict)
+    my_dict = dict()
+    for i in range(1, n + 1):
+        my_dict[i] = 3 * i + 1
 
-
-# task2()
+    print(my_dict)
 
 
 # 3. Напишите программу, в которой пользователь будет задавать две строки, а программа - определять количество вхождений одной строки в другой.
 
-def task3():
+def task31():
     text1 = input("Введите 1 строку: ")
     text2 = input("Введите 2 строку: ")
     count = 0
-    while poz != -1:
+    poz = 0
+    i = 0
+    while i < (int(len(text1) / len(text2))):
         poz = text1.find(text2, poz)
-        if poz != -1:
+        i += 1
+        if poz != -1 and poz < len(text1):
             count += 1
-    print(text1, text2, count)
+            poz += len(text2)
+        else:
+            break
+    print(f'Количество вхождений одной строки в другую: {count} раз(а)')
 
-    # for i in range(len(text1)):
 
+def task32():
+    str1 = input('Enter the string: ')
+    under_str = input('Enter the under string: ')
 
-task3()
+    print(str1.count(under_str))
+
+# task1()
+# task2()
+# task31()
+# task32()
