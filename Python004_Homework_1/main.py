@@ -13,7 +13,8 @@ import math
 
 def task1():
     def protectinput():
-        while True:
+        num_ = 0
+        while num_ not in ('1', '2', '3', '4', '5', '6', '7'):
             num_ = input('Введите день недели (1 - 7): ')
             if not num_.isdigit():
                 print("Вы должны ввести число от 1 до 7. Попробуйте еще раз")
@@ -21,7 +22,7 @@ def task1():
                 number_ = int(num_)
                 if 0 < number_ < 8:
                     return number_
-                    break
+                    # break
                 else:
                     print("Вы должны ввести число от 1 до 7. Попробуйте еще раз")
 
@@ -68,6 +69,7 @@ def is_number(str):
 
 def protectinput():
     while True:
+        # while not num.isdigit() or (num[0] == '-' and not num[1:].isdigit()) or len(coords) != 2:
         coords = (input('Введите координаты x и y через пробел: ').split())
         if (len(coords) != 2) or (not is_number(coords[0]) or not is_number(coords[1])):
             print("Было введено не число или неверное количество элементов. Попробуйте еще раз")
@@ -100,7 +102,8 @@ def task3():
 
 def task4():
     def protectinput():
-        while True:
+        num_ = 0
+        while num_ not in ('1', '2', '3', '4'):
             num_ = input('Введите номер четверти (1 - 4): ')
             if not num_.isdigit():
                 print("Вы должны ввести число от 1 до 4. Попробуйте еще раз")
@@ -108,7 +111,7 @@ def task4():
                 number_ = int(num_)
                 if 0 < number_ < 5:
                     return number_
-                    break
+                    # break
                 else:
                     print("Вы должны ввести число от 1 до 4. Попробуйте еще раз")
 
