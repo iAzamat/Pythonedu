@@ -1,4 +1,5 @@
 import math
+import random
 
 '''
 1. Напишите программу, которая принимает на вход вещественное число и показывает сумму его цифр.
@@ -17,17 +18,22 @@ def is_number(str):
         return False
 
 
-def protectinput():
-    num_ = input('Введите вещественное число: ')
+def protectinput(str='вещественное число'):
+    num_ = input(f'Введите {str}: ')
     while not is_number(num_):
-        num_ = input('Введите вещественное число: ')
+        num_ = input(f'Введите {str}: ')
 
     return num_
 
 
 def task1():
-    number = abs(float(protectinput()))
-    print(number)
+    number = protectinput()
+    sum = 0
+    for i in number:
+        if i.isdigit():
+            sum += int(i)
+
+    print(f'Сумма цифр числа {number} равна {sum}')
 
 
 '''
@@ -39,7 +45,12 @@ def task1():
 
 
 def task2():
-    print()
+    number = int(protectinput('натуральное число'))
+    mults = []
+    for i in range(1, number + 1):
+        mults.append(math.factorial(i))
+
+    print(mults)
 
 
 '''
@@ -49,7 +60,15 @@ def task2():
 
 
 def task3():
-    print()
+    number = int(protectinput('натуральное число'))
+    posl = []
+    sum = 0
+    for i in range(1, number + 1):
+        func = round(((1 + 1 / i) ** i))
+        posl.append(func)
+        sum += func
+
+    print(f'Для n = {number}: {posl} -> {sum}')
 
 
 '''
@@ -64,7 +83,22 @@ Number of elements: 5
 
 
 def task4():
-    print()
+    interval = []
+    # number = abs(int(protectinput('натуральное число')))
+    number = random.randint(5, 10)
+    for i in range(-number, number + 1):
+        interval.append(i)
+
+    print(f'Список: {interval}')
+    pos_one = int(protectinput('первую позицию'))
+    while not 0 < pos_one < len(interval) + 1:
+        pos_one = int(protectinput('первую позицию'))
+    pos_two = int(protectinput('вторую позицию'))
+    while not 0 < pos_two < len(interval) + 1:
+        pos_two = int(protectinput('вторую позицию'))
+
+    print(f'Position one: {pos_one}\nPosition two: {pos_two}\nNumber of elements: {number}')
+    print(f'{interval} -> {interval[pos_one - 1] * interval[pos_two - 1]}')
 
 
 '''
@@ -75,11 +109,29 @@ def task4():
 '''
 
 
+def lst_mix(lst_inp):
+    lst_source = []
+    lst_source = lst_inp.copy()
+    lst_buf = []
+    for _ in range(len(lst_inp)):
+        rch = random.choice(lst_source)
+        lst_buf.append(rch)
+        lst_source.remove(rch)
+
+    return lst_buf
+
+
 def task5():
-    print()
+    my_list = []
+    number = random.randint(6, 11)
+    for i in range(number):
+        my_list.append(i)
+
+    print(f'Исходный список:\n{my_list}')
+    print(f'Перемешанный список:\n{lst_mix(my_list)}')
 
 
-task1()
+# task1()
 # task2()
 # task3()
 # task4()
