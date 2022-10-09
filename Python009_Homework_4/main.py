@@ -1,5 +1,6 @@
 import random
 from decimal import Decimal
+import json
 
 '''
 1. Вычислить число c заданной точностью d
@@ -110,6 +111,59 @@ k=9 => 2*x^9 - 4*x + 5 = 0 или x² + 5 = 0 или 10*x² = 0
 '''
 
 
+def polygenjson(num: int):
+    polykoef = {}
+    for i in reversed(range(num + 1)):
+        polykoef[i] = random.randint(-100, 100)
+    with open('file.json', 'w') as f:
+        json_polykoef = json.dump(polykoef, f)
+
+    # print('Данные успешно записаны в файл')
+
+
+def polygendisplay():
+    polykoef2 = {}
+    with open('file.json', 'r') as f:
+        polykoef0 = json.load(f)
+
+    for i in reversed(range(len(polykoef0))):
+        polykoef2[i] = polykoef0[str(i)]
+
+    str_1 = ""
+    if polykoef2[len(polykoef2) - 1] != 0:
+        str_1 = f"{polykoef2[len(polykoef2) - 1]}*x^{len(polykoef2) - 1}"
+    for i in range(len(polykoef2) - 2, 1, -1):
+        if polykoef2[i] != 0:
+            znak = ' + ' if polykoef2[i] > 0 else ' - '
+            str_1 += f"{znak}{abs(polykoef2[i])}*x^{i}"
+    if polykoef2[1] != 0:
+        znak = ' + ' if polykoef2[1] > 0 else ' - '
+        str_1 += f"{znak}{abs(polykoef2[1])}*x"
+    if polykoef2[0] != 0:
+        znak = ' + ' if polykoef2[0] > 0 else ' - '
+        str_1 += f"{znak}{abs(polykoef2[0])} = 0"
+    else:
+        str_1 += f" = 0"
+
+    # print(polykoef2)
+    print(str_1)
+
+
+def task4():
+    num = int(input("Введите натуральную степень k: "))
+    polygenjson(num)
+    polygendisplay()
+
+
+'''
+5. Даны два файла, в каждом из которых находится запись многочлена. 
+Задача - сформировать файл, содержащий сумму многочленов.
+5x^2 + 3x - 9
+3x^2 - 2x - 5
+8x^2 +1x - 14
+'''
+
+
 def polygen(k):
     lst = []
     for i in range(k, -1, -1):
@@ -133,28 +187,6 @@ def polygen(k):
                 lst.append(str1)
     lst.append('=0')
     return lst
-
-
-def task4():
-    k = random.randint(2, 6)
-    print(f'k = {k}')
-    lst = polygen(k)
-    print(lst)
-
-    with open('file.txt', 'w') as data:
-        for elem in lst:
-            data.write(elem)
-
-    print('Данные записаны в файл')
-
-
-'''
-5. Даны два файла, в каждом из которых находится запись многочлена. 
-Задача - сформировать файл, содержащий сумму многочленов.
-5x^2 + 3x - 9
-3x^2 - 2x - 5
-8x^2 +1x - 14
-'''
 
 
 def task5():
@@ -245,6 +277,7 @@ def task5():
             data.write(elem)
 
     print('Данные записаны в файл')
+
 
 # task1()
 # task2()
