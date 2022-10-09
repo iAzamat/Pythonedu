@@ -71,7 +71,8 @@ def task3():
     max_ = my_list[0] % 1
     for val in my_list:
         if isinstance(val, float):
-            val = round(val % 1, 2)
+            # val = round(val % 1, 2)
+            val = round(val - int(val), 2)
             if val < min_:
                 min_ = val
             if val > max_:
@@ -124,6 +125,11 @@ def dectobin(number_):
 
 def printdectobin(number):
     print(f'{number} -> {dectobin(number)}')
+    print(f'{number} -> {inttobinrecursive(number)} (рекурсия)')
+
+
+def inttobinrecursive(init: int):
+    return "" if init == 0 else (inttobinrecursive(init // 2) + ("0" if init % 2 == 0 else "1"))
 
 
 def task4():
@@ -189,5 +195,5 @@ def task5():
 # task1()
 # task2()
 # task3()
-# task4()
+task4()
 # task5()
