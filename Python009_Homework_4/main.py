@@ -111,19 +111,19 @@ k=9 => 2*x^9 - 4*x + 5 = 0 или x² + 5 = 0 или 10*x² = 0
 '''
 
 
-def polygenjson(num: int):
+def polygenjson(num: int, filename='file'):
     polykoef = {}
     for i in reversed(range(num + 1)):
         polykoef[i] = random.randint(-100, 100)
-    with open('file.json', 'w') as f:
+    with open(f'{filename}.json', 'w') as f:
         json_polykoef = json.dump(polykoef, f)
 
     # print('Данные успешно записаны в файл')
 
 
-def polygendisplay():
+def polygendisplay(filename='file'):
     polykoef2 = {}
-    with open('file.json', 'r') as f:
+    with open(f'{filename}.json', 'r') as f:
         polykoef0 = json.load(f)
 
     for i in reversed(range(len(polykoef0))):
@@ -164,87 +164,22 @@ def task4():
 '''
 
 
-def polygen(k):
-    lst = []
-    for i in range(k, -1, -1):
-        randkoef = random.randint(0, 100)
-        if randkoef != 0:
-            if i == 0:
-                # str1 = f'+{randkoef}' if randkoef > 0 else f'{randkoef}'
-                str1 = f'+{randkoef}'
-                lst.append(str1)
-            elif i == 1:
-                # str1 = f'+{randkoef}*x' if randkoef > 0 else f'{randkoef}*x'
-                str1 = f'+{randkoef}*x'
-                lst.append(str1)
-            elif i == k:
-                # str1 = f'{randkoef}*x^{i}'
-                str1 = f'{randkoef}*x^{i}'
-                lst.append(str1)
-            else:
-                # str1 = f'+{randkoef}*x^{i}' if randkoef > 0 else f'{randkoef}*x^{i}'
-                str1 = f'+{randkoef}*x^{i}'
-                lst.append(str1)
-    lst.append('=0')
-    return lst
+def polysum(filename1='file1', filename2='file2', fileresult='file3'):
+    polykoef1 = {}
+    polykoef2 = {}
+    with open(f'{filename1}.json', 'r') as f:
+        polykoefb1 = json.load(f)
 
+    for i in reversed(range(len(polykoefb1))):
+        polykoef1[i] = polykoefb1[str(i)]
 
-def task5():
-    lst1 = polygen(random.randint(2, 6))
-    lst2 = polygen(random.randint(2, 6))
+    with open(f'{filename2}.json', 'r') as f:
+        polykoefb2 = json.load(f)
 
-    with open('file1.txt', 'w') as data:
-        for elem in lst1:
-            data.write(elem)
+    for i in reversed(range(len(polykoefb2))):
+        polykoef2[i] = polykoefb2[str(i)]
 
-    with open('file2.txt', 'w') as data:
-        for elem in lst2:
-            data.write(elem)
-
-    with open('file1.txt', 'r') as data:
-        str1 = data.read().replace('=0', '')
-        str1 = str1.split('+')
-
-    with open('file2.txt', 'r') as data:
-        str2 = data.read().replace('=0', '')
-        str2 = str2.split('+')
-
-    print(f'Первый многочлен: {str1}')
-    print(f'Второй многочлен: {str2}')
-
-    for elem in range(len(str1)):
-        if str1[elem].find('*x') == -1:
-            str1[elem] = f'{str1[elem]}*x^0'
-
-    for elem in range(len(str1)):
-        if str1[elem].find('^') == -1 and str1[elem].find('*') != -1:
-            str1[elem] = f'{str1[elem]}^1'
-
-    for elem in range(len(str2)):
-        if str2[elem].find('*x') == -1:
-            str2[elem] = f'{str2[elem]}*x^0'
-
-    for elem in range(len(str2)):
-        if str2[elem].find('^') == -1 and str2[elem].find('*') != -1:
-            str2[elem] = f'{str2[elem]}^1'
-
-    # print(str1)
-    # print(str2)
-
-    str1_koef = {}
-    for elem in str1:
-        a1, b1 = elem.split('*x^')
-        str1_koef[int(b1)] = int(a1)
-
-    str2_koef = {}
-    for elem in str2:
-        a2, b2 = elem.split('*x^')
-        str2_koef[int(b2)] = int(a2)
-
-    # print(str1_koef)
-    # print(str2_koef)
-
-    a = (str1_koef, str2_koef)
+    a = (polykoef1, polykoef2)
 
     resultdict = {}
 
@@ -256,27 +191,22 @@ def task5():
                 resultdict[key] = dictionary[key]
 
     resultdict = dict(sorted(resultdict.items(), reverse=True))
-    # print(resultdict)
 
-    reslst = []
-    for el in range(len(resultdict) - 1, -1, -1):
-        if el == 0:
-            reslst.append(f'+{resultdict[el]}')
-        elif el == 1:
-            reslst.append(f'+{resultdict[el]}*x')
-        elif el == len(resultdict) - 1:
-            reslst.append(f'{resultdict[el]}*x^{el}')
-        else:
-            reslst.append(f'+{resultdict[el]}*x^{el}')
-    reslst.append('=0')
+    with open(f'{fileresult}.json', 'w') as f:
+        json_polyresult = json.dump(resultdict, f)
 
-    print(f'Результат: {reslst}')
 
-    with open('file3.txt', 'w') as data:
-        for elem in reslst:
-            data.write(elem)
+def task5():
+    k1 = random.randint(2, 6)
+    k2 = random.randint(2, 6)
+    polygenjson(k1, 'file1')
+    polygenjson(k2, 'file2')
 
-    print('Данные записаны в файл')
+    polysum('file1', 'file2')
+
+    polygendisplay('file1')
+    polygendisplay('file2')
+    polygendisplay('file3')
 
 
 # task1()
