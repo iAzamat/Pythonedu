@@ -20,42 +20,44 @@ def task2():
         a, b = b, a + b
 
 
+def pow(n, mult):
+    '''
+    Возвращает x в степени n. Предполагает, что I – это единичная матрица, которая
+    перемножается с mult, а n – положительное целое
+    '''
+
+    I = [[1, 0], [0, 1]]
+    x = [[1, 1], [1, 0]]
+    if n == 0:
+        # print('Возвращается I, равна:', I)
+        return I
+    elif n == 1:
+        # print('Возвращается Х, равен:', x)
+        return x
+    else:
+        # print('n // 2, mult:', n // 2, I, mult)
+        y = pow(n // 2, mult)
+        # print('y = mult(y, y), y =', y)
+        y = mult(y, y)
+        if n % 2:
+            # print('y = mult(x, y), x, y =', x, y)
+            y = mult(x, y)
+        # print('Возвращается y =', y)
+        return y
+
+
+def matrix_multiply(A, B):
+    BT = list(zip(*B))
+    # print('BT', BT)
+    res = [[sum(a * b
+                for a, b in zip(row_a, col_b))
+            for col_b in BT]
+           for row_a in A]
+    # print('matrix_multiply=', res)
+    return res
+
+
 def task3():
-    def pow(n, mult):
-        """
-        Возвращает x в степени n. Предполагает, что I – это единичная матрица, которая
-        перемножается с mult, а n – положительное целое
-        """
-
-        I = [[1, 0], [0, 1]]
-        x = [[1, 1], [1, 0]]
-        if n == 0:
-            print('Возвращается I, равна:', I)
-            return I
-        elif n == 1:
-            print('Возвращается Х, равен:', x)
-            return x
-        else:
-            print('n // 2, mult:', n // 2, I, mult)
-            y = pow(n // 2, mult)
-            print('y = mult(y, y), y =', y)
-            y = mult(y, y)
-            if n % 2:
-                print('y = mult(x, y), x, y =', x, y)
-                y = mult(x, y)
-            print('Возвращается y =', y)
-            return y
-
-    def matrix_multiply(A, B):
-        BT = list(zip(*B))
-        print('BT', BT)
-        res = [[sum(a * b
-                    for a, b in zip(row_a, col_b))
-                for col_b in BT]
-               for row_a in A]
-        print('matrix_multiply=', res)
-        return res
-
     print(pow(8, matrix_multiply)[0][1])
 
 
@@ -78,6 +80,35 @@ def task4():
     # result2 = lst[:]
     # result2 = set(result2)
     # print(result2)
+
+
+'''
+3. Задайте последовательность чисел. 
+Напишите программу, которая выведет список неповторяющихся элементов 
+исходной последовательности.
+1 2 2 1 3 4 5 6 6 7 4 -> 3 5 7
+'''
+from random import randrange
+
+
+def original_numbers(new_list):
+    result_list = []
+    for val in new_list:
+        if val not in result_list: result_list.append(val)
+    result_list = sorted(result_list)
+    return result_list
+
+
+def task42():
+    random_list = [randrange(1, 10) for _ in range(20)]
+    print(random_list)
+    print(original_numbers(random_list))
+
+    # =============================
+
+    print(random_list)
+    random_list = set(random_list)
+    print(random_list)
 
 
 def task5():
@@ -116,17 +147,6 @@ def task6():
 
     magit_to_file(num)
 
-
-# import sympy as sym
-# x = Symbol('x')
-# y = Symbol('y')
-# # x = -1.038
-# # y = 3**0.5
-# t = (2 * x + 3 * y) ** 2 - 3 * x * (4 / 3 * x + 4 * y)
-# simplify(t)
-# f = 4 * x ** 4 - 65 * x ** 2 + 16
-# solve(f)
-# print(f)
 
 '''
 7. В файле находится N натуральных чисел, записанных через пробел. 
@@ -196,10 +216,12 @@ def task9():
     my_list = list(filter(lambda x: 'абв' not in x, text.split()))
     print(' '.join(my_list))
 
+
 # task1()
 # task2()
 # task3()
 # task4()
+# task42()
 # task5()
 # task6()
 # task7()

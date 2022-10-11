@@ -9,9 +9,10 @@ import random
 
 def task1():
     def my_random(n):
-        b = []
-        for _ in range(n):
-            b.append(random.randint(0, 100))
+        # b = []
+        # for _ in range(n):
+        #     b.append(random.randint(0, 100))
+        b = [random.randint(0, 100) for _ in range(n)]
         return b
 
     n = int(input("Введите число N: "))
@@ -30,10 +31,8 @@ def task1():
 
 '''
 2. Для натурального n создать словарь индекс-значение, состоящий из элементов последовательности 3n + 1.
-    
-    *Пример:*
-    
-    - Для n = 6: {1: 4, 2: 7, 3: 10, 4: 13, 5: 16, 6: 19}
+*Пример:*
+Для n = 6: {1: 4, 2: 7, 3: 10, 4: 13, 5: 16, 6: 19}
 '''
 
 
@@ -42,8 +41,10 @@ def task2():
     my_dict = dict()
     for i in range(1, n + 1):
         my_dict[i] = 3 * i + 1
-
     print(my_dict)
+
+    new_dict_comp = {k: 3 * k + 1 for k in range(1, n + 1)}
+    print(new_dict_comp)
 
 
 # 3. Напишите программу, в которой пользователь будет задавать две строки, а программа - определять количество вхождений одной строки в другой.
@@ -70,6 +71,7 @@ def task32():
     under_str = input('Enter the under string: ')
 
     print(str1.count(under_str))
+
 
 # task1()
 # task2()

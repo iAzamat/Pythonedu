@@ -88,6 +88,33 @@ def task7():
         print(f'Дискриминант < 0 (D = {d})\nУравнение не имеет корней')
 
 
+from sympy.solvers import solve
+from sympy import Symbol
+
+
+def fun(a, b, c):
+    x = Symbol('x')
+    return solve(f'{a}*x**2+{b}*x+{c}', x)
+
+
+def task72():
+    a = int(input('Введите переменную a: '))
+    b = int(input('Введите переменную b: '))
+    c = int(input('Введите переменную c: '))
+    my_lst = [0, 0]
+    my_lst[0], my_lst[1] = fun(a, b, c)
+    flag = False
+    for elem in my_lst:
+        if not 'I' in str(elem):
+            flag = True
+
+    if flag:
+        print(f'Корни уравнения: {my_lst[0]}, {my_lst[1]}')
+    else:
+        print('Действительных корней нет')
+        print(f'Корни уравнения в комплексных переменных: {my_lst[0]}, {my_lst[1]}')
+
+
 '''
 3. Задайте два числа. Напишите программу, которая найдёт НОК (наименьшее общее кратное) этих двух чисел.
 '''
@@ -130,5 +157,6 @@ def task9():
 # task5()
 # task6()
 # task7()
+# task72()
 # task8()
 # task9()

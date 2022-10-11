@@ -31,7 +31,6 @@ def task2():
     lst = []
     for i in range(5):
         lst.append(int(input(f'Введите {i + 1} число: ')))
-
     print(max(lst))
 
 
@@ -132,6 +131,7 @@ def task8():
     print(a // b)  # -3    -4
     print(a % b)  # -2     3
 
+
 # -3, -2 - C++, C# (ошибка при создании)
 # -4, 3 - python(правильный вариант с математической точки зрения)
 
@@ -144,4 +144,3 @@ def task8():
 # task6()
 # task7()
 # task8()
-
