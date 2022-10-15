@@ -1,4 +1,3 @@
-from statistics import mode
 import model_sum as model
 import view
 
