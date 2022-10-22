@@ -56,7 +56,7 @@
 
 from bot_commands import *
 
-app = ApplicationBuilder().token("5636269449:AAHvpEmJ79WuTMEb8G5Wo2AofkmxUC79_DA").build()
+app = ApplicationBuilder().token("").build()
 
 app.add_handler(CommandHandler("hi", hi_command))
 app.add_handler(CommandHandler("time", time_command))
