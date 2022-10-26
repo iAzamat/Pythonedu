@@ -1,8 +1,0 @@
-import functools
-import operator
-
-
-# cur.execute("select c_type from v_person_short;")
-# list_person2 = functools.reduce(operator.add, (cur.fetchall()))
-# print(list_person2)
-
