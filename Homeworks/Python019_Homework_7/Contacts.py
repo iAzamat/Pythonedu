@@ -12,7 +12,7 @@ import txt_module
 
 
 PATH_PROG = 'd:/GDisk/GeekBraims/Python/PythonSeminars/Seminar7/PhoneBook'
-PATH_PROG = '.'
+PATH_PROG = ''
 
 # Обработка события выбора из списка и передача данных в поля ввода
 def lst_person_selected(event):
