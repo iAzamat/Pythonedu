@@ -4,7 +4,7 @@ from telebot import types
 from simpleeval import simple_eval
 import logger
 
-bot = telebot.TeleBot("5636269449:AAHvpEmJ79WuTMEb8G5Wo2AofkmxUC79_DA")
+bot = telebot.TeleBot("token")
 
 value = ""
 old_value = ""
