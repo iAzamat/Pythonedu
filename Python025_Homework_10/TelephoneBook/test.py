@@ -80,7 +80,7 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
 
 def main() -> None:
-    application = Application.builder().token("5636269449:AAHvpEmJ79WuTMEb8G5Wo2AofkmxUC79_DA").build()
+    application = Application.builder().token("token").build()
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("addcontact", addcontact)],
         states={
