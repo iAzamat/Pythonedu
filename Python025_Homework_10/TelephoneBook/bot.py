@@ -1,6 +1,6 @@
 import telegram
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
+from telegram import Update, ReplyKeyboardMarkup, ReplyKeyboardRemove
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters, ConversationHandler
 import json_module
 import csv_module
 import txt_module
@@ -59,16 +59,20 @@ async def exp_json(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 
 async def exp_files(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text(f'Выберете формат для экспорта:\n'
-                                    f'json: /exp_json\ncsv:  /exp_csv\ntxt:  /exp_txt')
+    reply_keyboard = [["/exp_json", "/exp_csv", "/exp_txt"]]
+    await update.message.reply_text(f'Выберете формат для экспорта:', reply_markup=ReplyKeyboardMarkup(
+        reply_keyboard, one_time_keyboard=True,
+        input_field_placeholder=f'Выберете формат для экспорта:'), )
 
 
 async def imp_files(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text(f'Загрузите 3 файла(person, phones, types) одного из форматов (json, txt, csv)\n'
-                                    f'Затем Выберете команду для импорта в бд\n'
-                                    f'json: /imp_json\n'
-                                    f'csv:  /imp_csv\n'
-                                    f'txt:  /imp_txt\n')
+    reply_keyboard = [["/imp_json", "/imp_csv", "/imp_txt"]]
+    await update.message.reply_text(
+        f'Загрузите 3 файла(person, phones, types) одного из форматов (json, txt, csv)\n'
+        f'Затем выберете команду для импорта в бд\n',
+        reply_markup=ReplyKeyboardMarkup(
+            reply_keyboard, one_time_keyboard=True,
+            input_field_placeholder="Выберете команду для импорта в бд\n"), )
 
 
 async def imp_csv(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -97,7 +101,7 @@ async def Getfile(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 
 def bot_start():
-    app = ApplicationBuilder().token("token").build()
+    app = ApplicationBuilder().token("5636269449:AAHvpEmJ79WuTMEb8G5Wo2AofkmxUC79_DA").build()
     app.add_handler(CommandHandler("exp_csv", exp_csv))
     app.add_handler(CommandHandler("exp_txt", exp_txt))
     app.add_handler(CommandHandler("exp_json", exp_json))
@@ -107,5 +111,22 @@ def bot_start():
     app.add_handler(CommandHandler("imp_txt", imp_txt))
     app.add_handler(CommandHandler("imp_json", imp_json))
     app.add_handler(MessageHandler(filters.Document.ALL, Getfile))
+
+    # app.add_handler(CommandHandler("addcontact", persons_func_create))
+    # app.add_handler(CommandHandler("delcontact", persons_func_delete))
+    # app.add_handler(CommandHandler("modcontact", persons_func_modify))
+    #
+    # app.add_handler(CommandHandler("addphone", phones_func_create))
+    # app.add_handler(CommandHandler("delphone", phones_func_delete))
+    # app.add_handler(CommandHandler("modphone", phones_func_modify))
+    #
+    # app.add_handler(CommandHandler("addtype", types_func_create))
+    # app.add_handler(CommandHandler("deltype", types_func_delete))
+    # app.add_handler(CommandHandler("modtype", types_func_modify))
+    #
+    # app.add_handler(CommandHandler("showall", show_contacts_phones))
+    # app.add_handler(CommandHandler("showpersoninfo", show_contact_info))
+
+    # app.add_handler(MessageHandler(filters.TEXT, test))
     print('Server start')
     app.run_polling()
