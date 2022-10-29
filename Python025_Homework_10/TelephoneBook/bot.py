@@ -101,7 +101,7 @@ async def Getfile(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 
 def bot_start():
-    app = ApplicationBuilder().token("5636269449:AAHvpEmJ79WuTMEb8G5Wo2AofkmxUC79_DA").build()
+    app = ApplicationBuilder().token("token").build()
     app.add_handler(CommandHandler("exp_csv", exp_csv))
     app.add_handler(CommandHandler("exp_txt", exp_txt))
     app.add_handler(CommandHandler("exp_json", exp_json))
