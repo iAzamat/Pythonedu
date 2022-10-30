@@ -76,11 +76,12 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text(
         "Вы отменили операцию", reply_markup=ReplyKeyboardRemove()
     )
+    data.clear()
     return ConversationHandler.END
 
 
 def main() -> None:
-    application = Application.builder().token("token").build()
+    application = Application.builder().token("5636269449:AAHvpEmJ79WuTMEb8G5Wo2AofkmxUC79_DA").build()
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("addcontact", addcontact)],
         states={
