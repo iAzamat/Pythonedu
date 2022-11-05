@@ -1,6 +1,5 @@
 from telegram import Update, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import \
-    Application, \
     ApplicationBuilder, \
     CommandHandler, \
     MessageHandler, \
@@ -11,7 +10,6 @@ from telegram.ext import \
 import json_module
 import csv_module
 import txt_module
-import sqlite3
 import functools
 import operator
 

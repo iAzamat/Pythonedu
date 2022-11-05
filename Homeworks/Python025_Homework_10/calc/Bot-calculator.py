@@ -1,5 +1,4 @@
 import telebot
-from telebot import types
 # pip install simpleeval
 from simpleeval import simple_eval
 import logger
@@ -50,7 +49,7 @@ def getmessage(message):
 
 @bot.message_handler(commands=["log"])
 def getlog(message):
-    doc = open('./log/log.csv', 'rb')
+    doc = open('log/log.csv', 'rb')
     bot.send_document(message.from_user.id, doc)
 
 
